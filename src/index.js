@@ -2,6 +2,7 @@ import app from './app.js';
 import db from './config/database.js';
 import './models/Photo.js';
 import './models/User.js';
+import './models/Information';
 
 async function connect() {
   try {
