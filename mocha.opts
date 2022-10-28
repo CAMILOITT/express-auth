@@ -1,0 +1,2 @@
+--file ./__tests__/setup.js
+--file ./__test__/teardown.js
