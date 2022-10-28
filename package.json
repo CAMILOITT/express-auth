@@ -8,7 +8,8 @@
     "dev": "nodemon ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write .",
-    "lint": "eslint --fix . --ext .js "
+    "lint": "eslint --fix . --ext .js ",
+    "migrate":"sequelize-cli db:migrate"
   },
   "keywords": [],
   "author": "",
