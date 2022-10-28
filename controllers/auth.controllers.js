@@ -12,20 +12,24 @@ export const register = async (req, res) => {
         .send({ message: 'name, email y password son requeridos' });
     }
 
-    if (password < 5) {
+    if (password.length < 5) {
       return res
         .status(400)
         .send({ message: 'contraseña debe tener mas de 5 caracteres' });
     }
 
-    if (!email.include('@')) {
+    if (!email.includes('@')) {
       return res.status(400).send({ message: 'el email debe incluir la @' });
     }
 
-    User.create({
+    const user = User.create({
       name,
       email,
       password: bcrypt.hashSync(password, 10),
+    });
+    res.status(201).json({
+      message: 'User Created',
+      userId: user.id,
     });
   } catch (error) {
     console.error(error);
@@ -35,27 +39,28 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = User.findOne({ where: { email } });
 
-    if (!user)
-      return res.status(404).json({ message: 'usuario no encontrado' });
+    const user = await User.findOne({ where: { email: email } });
+
+    if (!user) {
+      return res.status(404).send({ message: 'usuario no encontrado' });
+    }
 
     const passwordValid = bcrypt.compareSync(password, user.password);
 
-    if (!passwordValid)
-      return res.status(401).json({ message: 'la contraseña no es valida' });
+    if (!passwordValid) {
+      return res.status(401).send({ message: 'la contraseña no es valida' });
+    }
 
-    const token = jwt.sign({ id: user.id, name: user.id }, 'secret-key', {
+    const token = jwt.sign({ id: user.id, name: user.name }, 'secret-key', {
       expiresIn: 86400,
     });
 
-    res
-      .send(200)
-      .send({
-        user: { id: user.id, email: user.email, name: user.name },
-        message: 'sesión iniciada correctamente',
-        accessToken: token,
-      });
+    res.send(200).send({
+      user: { id: user.id, email: user.email, name: user.name },
+      message: 'sesión iniciada correctamente',
+      accessToken: token,
+    });
   } catch (error) {
     console.error(error);
   }

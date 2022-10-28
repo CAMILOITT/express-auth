@@ -1,8 +1,8 @@
 import app from './app.js';
 import db from './config/database.js';
-import './models/Photo.js';
-import './models/User.js';
-import './models/Information.js';
+// import './models/Photo.js';
+// import './models/User.js';
+// import './models/Information.js';
 
 async function connect() {
   try {

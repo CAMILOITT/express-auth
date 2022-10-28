@@ -27,6 +27,11 @@ const isUserAuthenticate = (req, res, next) => {
 
         return res.status(400).end();
       }
+    } else {
+      return res.status(403).json({
+        status: 403,
+        message: 'FORBIDDEN',
+      });
     }
   }
 };

@@ -10,8 +10,8 @@ const app = new Express();
 app.use(Express.json());
 
 // ROUTERS
-app.use('/api', authRouter);
-app.use('/api', informationRouter);
-app.use('/api', photosRouter);
+app.use(authRouter);
+app.use(informationRouter);
+app.use(photosRouter);
 
 export default app;
