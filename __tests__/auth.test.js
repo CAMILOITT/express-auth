@@ -33,12 +33,12 @@ describe('the auth', async () => {
 
   it('login user', async () => {
     const payload = {
-      email: 'camilo@outlook.com',
-      password: 'contraseñaDeLaCuenta',
+      'email': 'camilo@outlook.com',
+      'password': 'contraseñaDeLaCuenta',
     };
     const { body, status } = await request(app)
       .post('/auth/login')
-      .type('json')
+      .type("json")
       .send(payload);
     expect(status).to.equal(200);
   });
