@@ -31,17 +31,6 @@ describe('the auth', async () => {
     expect(status).to.equal(201);
   });
 
-  // it('login user', async () => {
-  //   const payload = {
-  //     "email": "camilo@email.com",
-  //     "password": "1234567890",
-  //   };
-  //   const { body, status } = await request(app)
-  //     .post('/auth/login')
-  //     .type('json')
-  //     .send(payload);
-  //   expect(status).to.equal(200);
-  // });
 
   it('data incorrect', async () => {
     const payload = {
