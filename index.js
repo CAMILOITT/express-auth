@@ -8,8 +8,8 @@ async function connect() {
   try {
     await db.authenticate();
     await db.sync({ force: true });
-    console.log('connect successful in port: 3000');
-    app.listen(3000);
+    app.listen(3005);
+    console.log('connect successful in port: 3005');
   } catch (error) {
     console.log('error in the connection: ', error);
   }

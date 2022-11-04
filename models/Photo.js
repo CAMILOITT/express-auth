@@ -4,11 +4,22 @@ import db from '../config/database.js';
 const Photo = db.define(
   'photo',
   {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    photo: { type: DataTypes.STRING, allowNull: false },
-    description: { type: DataTypes.STRING },
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    photo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+    },
   },
-  { tableName: 'photo' }
+  {
+    tableName: 'photo',
+  }
 );
 
 export default Photo;

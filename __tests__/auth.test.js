@@ -22,8 +22,8 @@ describe('the auth', async () => {
   it('create user', async () => {
     const payload = {
       name: 'Camilo',
-      email: 'camilo@outlook.com',
-      password: 'contraseñaDeLaCuenta',
+      email: 'camilo@email.com',
+      password: '1234567890',
     };
     const { body, status } = await request(app)
       .post('/auth/register')
@@ -31,15 +31,27 @@ describe('the auth', async () => {
     expect(status).to.equal(201);
   });
 
-  it('login user', async () => {
+  // it('login user', async () => {
+  //   const payload = {
+  //     "email": "camilo@email.com",
+  //     "password": "1234567890",
+  //   };
+  //   const { body, status } = await request(app)
+  //     .post('/auth/login')
+  //     .type('json')
+  //     .send(payload);
+  //   expect(status).to.equal(200);
+  // });
+
+  it('data incorrect', async () => {
     const payload = {
-      'email': 'camilo@outlook.com',
-      'password': 'contraseñaDeLaCuenta',
+      email: 'prueba@email.com',
+      password: '1309487',
     };
     const { body, status } = await request(app)
       .post('/auth/login')
-      .type("json")
+      .type('json')
       .send(payload);
-    expect(status).to.equal(200);
+    expect(status).to.equal(404);
   });
 });

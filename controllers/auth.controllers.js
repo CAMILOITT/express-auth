@@ -31,6 +31,7 @@ export const register = async (req, res) => {
       message: 'User Created',
       userId: user.id,
     });
+    
   } catch (error) {
     console.error(error);
   }
@@ -38,25 +39,30 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
-
-    const user = await User.findOne({ where: { email: email } });
+    const user = await User.findOne({ where: { email: req.body.email } });
 
     if (!user) {
       return res.status(404).send({ message: 'usuario no encontrado' });
     }
 
-    const passwordValid = bcrypt.compareSync(password, user.password);
+    const passwordValid = bcrypt.compareSync(req.body.password, user.password);
 
     if (!passwordValid) {
       return res.status(401).send({ message: 'la contraseña no es valida' });
     }
 
-    const token = jwt.sign({ id: user.id, name: user.name }, 'secret-key', {
-      expiresIn: 86400,
-    });
+    const token = jwt.sign(
+      {
+        id: user.id,
+        name: user.name,
+      },
+      process.env.JWT_SECRET_KEY,
+      {
+        expiresIn: 86400,
+      }
+    );
 
-    res.send(200).send({
+    res.status(200).send({
       user: { id: user.id, email: user.email, name: user.name },
       message: 'sesión iniciada correctamente',
       accessToken: token,

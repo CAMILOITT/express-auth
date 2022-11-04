@@ -1,8 +1,5 @@
 import jwt from 'jsonwebtoken';
 
-console.log('--------------------------------------');
-console.log(process.env.JWT_SECRET_KEY);
-console.log('--------------------------------------');
 
 const isUserAuthenticate = (req, res, next) => {
   const authHeader = req.headers.authenticate;
@@ -18,7 +15,7 @@ const isUserAuthenticate = (req, res, next) => {
 
     if (token) {
       try {
-        payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        payload = jwt.verify(token, 'secret');
         next();
       } catch (err) {
         if (err instanceof jwt.JsonWebTokenError) {

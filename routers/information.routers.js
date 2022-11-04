@@ -6,10 +6,10 @@ import {
 } from '../controllers/information.controllers.js';
 import isUserAuthenticated from './../middlewares/auth.middlewares.js';
 
-const router = Router();
+const informationRouter = Router();
 
-router.get('/information', /* isUserAuthenticated, */ getInformation);
-router.put('/information', /* isUserAuthenticated, */ updateInformation);
-router.post('/information', /* isUserAuthenticated, */ createInformation);
+informationRouter.get('/information', isUserAuthenticated, getInformation);
+informationRouter.put('/information', isUserAuthenticated, updateInformation);
+informationRouter.post('/information', isUserAuthenticated, createInformation);
 
-export default router;
+export default informationRouter;

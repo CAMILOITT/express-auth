@@ -9,14 +9,14 @@ import {
 } from '../controllers/photos.controller.js';
 import isUserAuthenticated from './../middlewares/auth.middlewares.js';
 
-const router = Router();
+const photosRouter = Router();
 
-router.get('/photos', /* isUserAuthenticated, */ getPhotos);
-router.post('/photos', /* isUserAuthenticated, */ createPhoto);
-router.get('/photos/:id', /* isUserAuthenticated, */ getPhoto);
-router.put('/photos/:id', /* isUserAuthenticated, */ updatePhoto);
-router.delete('/photos/:id', /* isUserAuthenticated, */ deletePhoto);
+photosRouter.get('/photos', isUserAuthenticated, getPhotos);
+photosRouter.post('/photos', isUserAuthenticated, createPhoto);
+photosRouter.get('/photos/:id', isUserAuthenticated, getPhoto);
+photosRouter.put('/photos/:id', isUserAuthenticated, updatePhoto);
+photosRouter.delete('/photos/:id', isUserAuthenticated, deletePhoto);
 
-router.get('/photos/:id/user', /* isUserAuthenticated, */ getPhotoUser);
+photosRouter.get('/photos/:id/user', isUserAuthenticated, getPhotoUser);
 
-export default router;
+export default photosRouter;
